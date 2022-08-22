@@ -7,7 +7,7 @@ export default registerAs('express', () => ({
     description: "Xcode Open API",
     url: process.env.APP_URL,
     port: process.env.APP_PORT || 3000,
-    enableCors: false,
+    enableCors: true,
     throttler: {
       ttlTime: 60,
       requestCount: 10

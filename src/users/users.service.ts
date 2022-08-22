@@ -32,7 +32,6 @@ export class UsersService {
       }
 
       await this.UsersModel.create(createUserDto);
-
       return sucessResponse.CREATED;
     } catch (error) {
         if (error?.response?.error) {
@@ -41,6 +40,7 @@ export class UsersService {
         else {
             throw CustomError.UnknownError(error?.message)
         }
+        
     }
   }
 
@@ -54,7 +54,7 @@ export class UsersService {
     }).lean();
   }
 
-  async update(userId: string, updateUserDto: UpdateUserDto) {
+  async update(userId: string, updateUserDto: CreateUserDto) {
     try {
       await this.UsersModel.updateOne(
         {_id: userId},

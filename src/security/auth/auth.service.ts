@@ -19,6 +19,7 @@ export class AuthService {
     async login(params: LoginDto): Promise<any> {
         let user: any = await this.userService.login(params);
         const accessToken = this.generateAuthToken(user);
+        console.log('token',accessToken);
         user.accessToken = accessToken;
         return user
     }

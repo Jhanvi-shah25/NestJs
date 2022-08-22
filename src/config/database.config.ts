@@ -6,7 +6,8 @@ export default registerAs('database', () => ({
     name: process.env.DATABASE_NAME,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
-    connectionString: "mongodb://"+process.env.DATABASE_USER+":"+process.env.DATABASE_PASS+"@"+process.env.DATABASE_HOST+":"+process.env.DATABASE_PORT+"/"+process.env.DATABASE_NAME+"?authSource=admin",
+    // connectionString: "mongodb://"+process.env.DATABASE_USER+":"+process.env.DATABASE_PASS+"@"+process.env.DATABASE_HOST+":"+process.env.DATABASE_PORT+"/"+process.env.DATABASE_NAME+"?authSource=admin",
+    connectionString: "mongodb://"+process.env.DATABASE_HOST+":"+process.env.DATABASE_PORT+"/"+process.env.DATABASE_NAME+"?authSource=admin",
     initialUser: {
       firstName: "Nilesh",
       lastName: "Kalsariya",

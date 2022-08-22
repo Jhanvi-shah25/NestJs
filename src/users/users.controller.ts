@@ -25,9 +25,9 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @Patch('update/:id')
+  @Post('update/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param('id') id: string, @Body() updateUserDto: CreateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 

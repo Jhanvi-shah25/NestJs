@@ -22,7 +22,7 @@ export const AuthExceptions = {
     },
 
     AccountNotexist(): any {
-        return new HttpException({ message: "Account does not exist!", error: 'accountNotexist', statusCode: HttpStatus.FORBIDDEN }, HttpStatus.FORBIDDEN);
+        return new HttpException({ message: "Account does not exist!", error: 'accountNotexist', statusCode: HttpStatus.OK }, HttpStatus.OK);
     },
 
     AccountNotActive(): any {
