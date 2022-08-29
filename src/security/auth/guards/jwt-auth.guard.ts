@@ -31,6 +31,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         }
 
         if (err || !user) {
+            console.log(err,user)
             throw err || AuthExceptions.ForbiddenException();
         }
 

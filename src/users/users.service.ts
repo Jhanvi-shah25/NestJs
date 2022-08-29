@@ -98,7 +98,8 @@ export class UsersService {
           gender: this.configService.get('database.initialUser.gender'),
           email: this.configService.get('database.initialUser.email'),
           password: '',
-          isActive: true
+          isActive: true,
+          profileUrl:''
         }
 
         let salt = bcrypt.genSaltSync(10);
@@ -121,6 +122,7 @@ export class UsersService {
         email: params.userName
       }).lean();
 
+      console.log('user ss',user)
       if (!user) {
         throw AuthExceptions.AccountNotexist();
       }
@@ -151,4 +153,5 @@ export class UsersService {
       email: email
     }).lean();
   }
+
 }

@@ -30,4 +30,7 @@ export class CreateUserDto {
     @IsOptional()
     @IsBoolean()
     isActive: boolean = false;
+
+    @ApiProperty()
+    profileUrl : string;
 }

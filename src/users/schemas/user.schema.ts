@@ -22,6 +22,9 @@ export class Users {
 
     @Prop({ required: true, default: false })
     isActive: boolean;
+
+    @Prop({required:true,default:false})
+    profileUrl : string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);
