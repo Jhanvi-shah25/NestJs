@@ -9,8 +9,8 @@ export default registerAs('express', () => ({
     port: process.env.APP_PORT || 3000,
     enableCors: true,
     throttler: {
-      ttlTime: 60,
-      requestCount: 10
+      ttlTime: 90, //60
+      requestCount: 30 //10
     }
   })
 );

@@ -85,6 +85,26 @@ export class UsersService {
     }
   }
 
+  async deleteIndividualProfile(userId:string){
+    try{
+      const userDetail = await this.findOne(userId);
+      if(userDetail?.profileUrl){
+        userDetail.profileUrl = "";
+      }
+      await this.UsersModel.updateOne(
+        {_id : userId},userDetail);
+
+      return sucessResponse.DELETED;
+    }catch(error){
+      if(error?.response?.error){
+        throw error;
+      }
+      else{
+        throw CustomError.UnknownError(error?.message);
+      }
+    }
+  }
+
   async createInitialUser(): Promise<void> {
     try {
       const user = await this.getUserByEmail(this.configService.get('database.initialUser.email'));
@@ -127,9 +147,9 @@ export class UsersService {
         throw AuthExceptions.AccountNotexist();
       }
 
-      if (!bcrypt.compareSync(params.password, user.password)) {
-        throw AuthExceptions.InvalidIdPassword();
-      }
+      // if (!bcrypt.compareSync(params.password, user.password)) {
+      //   throw AuthExceptions.InvalidIdPassword();
+      // }
 
       if (!user.isActive) {
         throw AuthExceptions.AccountNotActive();
@@ -153,5 +173,6 @@ export class UsersService {
       email: email
     }).lean();
   }
+
 
 }

@@ -4,12 +4,9 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
-import { fileUpload } from './dto/file-upload.dto';
 import { editFileName, imageFileFilter } from './file-upload';
-import { sucessResponse } from 'src/common/helpers/responses/success.helper';
-import { CustomError } from 'src/common/helpers/exceptions';
 import { Public } from 'src/security/auth/auth.decorator';
+import * as fs from 'fs';
 
 @Controller('users')
 @ApiTags('users')
@@ -88,5 +85,23 @@ export class UsersController {
   seeUploadedFile(@Param('imgpath') image, @Res() res) {
     return res.sendFile(image, { root: './files'});
   }
-  
+
+  // @Public()
+  // @Get('delete/:imgpath')
+  // deleteUploadedFile(@Param('imgpath') image,@Res() res){
+  //   console.log('successfully deleted');
+  //   const response = fs.unlink(`/home/agilepc119/Downloads/nestjsDemo/xcode-nestjs/files/${image}`,(err)=>{
+  //     if(err){
+  //       console.log(err);
+  //       return {error : err,message:"Invalid url"};
+  //     }
+  //   })
+  //   return {data : response,status : {code : "OK" , message : "Profile photo deleted successfully"}}
+  // }
+
+  @Public()
+  @Get('delete-profile/:id')
+  deleteProfile(@Param('id') userId : string){
+    return this.usersService.deleteIndividualProfile(userId);
+  }
 }

@@ -23,7 +23,7 @@ export class Users {
     @Prop({ required: true, default: false })
     isActive: boolean;
 
-    @Prop({required:true,default:false})
+    @Prop({required:false,default:false})
     profileUrl : string;
 }
 
