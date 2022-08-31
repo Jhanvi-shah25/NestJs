@@ -13,7 +13,8 @@ export default registerAs('database', () => ({
       lastName: "Kalsariya",
       gender: "Male",
       email: "nilesh.kalsariya@agileinfoways.com",
-      password: "123456"
+      password: "123456",
+      type : ['Admin']
     }
   })
 );

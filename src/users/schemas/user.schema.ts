@@ -25,6 +25,9 @@ export class Users {
 
     @Prop({required:false,default:false})
     profileUrl : string;
+
+    @Prop({required:true,default:false})
+    type : string[];
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

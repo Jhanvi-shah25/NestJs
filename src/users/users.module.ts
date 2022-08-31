@@ -14,10 +14,10 @@ import { LoggerModule } from 'src/common/logger/logger.module';
   providers: [UsersService],
   exports: [UsersService]
 })
-export class UsersModule {
-  // constructor(private readonly userService: UsersService) { }
+export class UsersModule implements OnModuleInit {
+  constructor(private readonly userService: UsersService) { }
 
-  // async onModuleInit(): Promise<void> {
-  //   await this.userService.createInitialUser()
-  // }
+  async onModuleInit(): Promise<void> {
+    await this.userService.createInitialUser()
+  }
 }

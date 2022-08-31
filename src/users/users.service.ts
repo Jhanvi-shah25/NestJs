@@ -119,7 +119,8 @@ export class UsersService {
           email: this.configService.get('database.initialUser.email'),
           password: '',
           isActive: true,
-          profileUrl:''
+          profileUrl:'',
+          type : this.configService.get('database.initialUser.type')
         }
 
         let salt = bcrypt.genSaltSync(10);

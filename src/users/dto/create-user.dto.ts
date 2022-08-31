@@ -33,4 +33,7 @@ export class CreateUserDto {
 
     @ApiProperty()
     profileUrl : string;
+
+    @ApiProperty()
+    type : string[];
 }
