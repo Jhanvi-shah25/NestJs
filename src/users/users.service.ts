@@ -32,7 +32,7 @@ export class UsersService {
       }
 
       await this.UsersModel.create(createUserDto);
-      return sucessResponse.CREATED;
+      return {data : createUserDto, status: sucessResponse.CREATED};
     } catch (error) {
         if (error?.response?.error) {
             throw error;
@@ -45,7 +45,14 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.UsersModel.find().lean();
+    let fullList = await this.UsersModel.find().lean();
+    let newAddedList = [];
+    fullList.forEach((newList)=>{
+      if(newList["type"][0] !== 'Admin'){
+        newAddedList.push(newList);
+      }
+    })
+    return await newAddedList;
   }
 
   async findOne(userId: string) {
@@ -60,7 +67,7 @@ export class UsersService {
         {_id: userId},
         updateUserDto
       );
-      return sucessResponse.UPDATED;
+      return {data : updateUserDto, status: sucessResponse.UPDATED};
     } catch (error) {
       if (error?.response?.error) {
         throw error;

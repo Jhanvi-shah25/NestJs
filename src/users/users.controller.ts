@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, ParseFilePipeBuilder, UploadedFiles, Res } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, updatePasswordRequest } from './dto/create-user.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from './file-upload';
@@ -104,4 +104,11 @@ export class UsersController {
   deleteProfile(@Param('id') userId : string){
     return this.usersService.deleteIndividualProfile(userId);
   }
+
+  @Post('reset/password')
+  changePassword(@Body() updatePassword: updatePasswordRequest){
+
+  }
+
+
 }

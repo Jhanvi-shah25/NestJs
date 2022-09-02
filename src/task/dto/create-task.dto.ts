@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsString, IsOptional, IsEmail, IsBoolean, IsDate, IsArray } from "class-validator";
+import { ObjectId, Schema } from "mongoose";
 export class createTaskDto {
     @ApiProperty()
     @IsNotEmpty()
@@ -10,13 +11,12 @@ export class createTaskDto {
     @IsNotEmpty()
     @IsString()
     taskDescription: string;
+}
 
-    // @ApiProperty()
-    // @IsNotEmpty()
-    // @IsDate()
-    // deadline: Date;
+
+export class assignTask{
     @ApiProperty()
-    @IsOptional()
-    @IsArray()
-    userIds : string[];
+    userId : [string]
+    @ApiProperty()
+    taskId : string
 }

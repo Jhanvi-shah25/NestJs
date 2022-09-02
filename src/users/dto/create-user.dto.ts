@@ -37,3 +37,10 @@ export class CreateUserDto {
     @ApiProperty()
     type : string[];
 }
+
+export class updatePasswordRequest{
+    @ApiProperty()
+    oldPassword:string;
+    @ApiProperty()
+    newPassword:string;
+}

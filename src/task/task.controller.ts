@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { createTaskDto } from './dto/create-task.dto';
+import { assignTask, createTaskDto } from './dto/create-task.dto';
 import { TaskService } from './task.service';
 
 @Controller('task')
@@ -34,6 +34,11 @@ export class TaskController {
     @Delete('removeTask/:id')
     removeSingleTask(@Param('id') taskId : string){
         return this.taskService.removeTask(taskId);
+    }
+
+    @Post('assign/task')
+    assignTaskToUsers(@Body() assignUser : assignTask){
+        return this.taskService.assignTask(assignUser);
     }
 
 
