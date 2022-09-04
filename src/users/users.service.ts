@@ -10,13 +10,15 @@ import { LoginDto } from 'src/common/dto/common.dto'
 import { Users, UsersDocument } from 'src/users/schemas/user.schema';
 import { AuthExceptions, CustomError, TypeExceptions } from 'src/common/helpers/exceptions';
 import { sucessResponse } from 'src/common/helpers/responses/success.helper';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(Users.name) private UsersModel: Model<UsersDocument>,
     private myLogger: LoggerService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private jwtService : JwtService
   ) {
     // Due to transient scope, UsersService has its own unique instance of MyLogger,
     // so setting context here will not affect other instances in other services
@@ -181,6 +183,10 @@ export class UsersService {
       email: email
     }).lean();
   }
+   async resetPassword(user,oldpwd,newpwd){
+    let user_info = this.jwtService.decode(user);
+    console.log('see info',user_info);
+   }
 
 
 }

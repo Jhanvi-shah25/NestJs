@@ -20,7 +20,6 @@ export class AuthService {
         let user: any = await this.userService.login(params);
         console.log('in auth',user)
         const accessToken = this.generateAuthToken(user);
-        console.log('token',accessToken);
         user.accessToken = accessToken;
         return user
     }

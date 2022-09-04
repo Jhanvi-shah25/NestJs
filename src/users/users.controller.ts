@@ -7,6 +7,7 @@ import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from './file-upload';
 import { Public } from 'src/security/auth/auth.decorator';
 import * as fs from 'fs';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 @ApiTags('users')
@@ -107,7 +108,8 @@ export class UsersController {
 
   @Post('reset/password')
   changePassword(@Body() updatePassword: updatePasswordRequest){
-
+    
+    // return this.usersService.resetPassword(user,updatePassword.oldPassword,updatePassword.newPassword);
   }
 
 
