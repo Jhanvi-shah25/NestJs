@@ -13,6 +13,8 @@ import DatabaseConfiguration from './config/database.config';
 import AuthConfiguration from './config/auth.config';
 import { TaskModule } from './task/task.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { ChatController } from './chat/chat.controller';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -29,7 +31,8 @@ import { MulterModule } from '@nestjs/platform-express';
     AuthModule,
     ThrottleModule,
     UsersModule,
-    TaskModule
+    TaskModule,
+    ChatModule
   ],
   providers: [
     {
@@ -41,6 +44,6 @@ import { MulterModule } from '@nestjs/platform-express';
       useClass: ThrottlerGuard
     }
   ],
-  controllers: [],
+  controllers: [ChatController],
 })
 export class AppModule {}
