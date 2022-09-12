@@ -11,7 +11,8 @@ export class ChatService {
     constructor(@InjectModel(Chat.name) private chatModel : Model<ChatDocument>){}
 
     private allUsers = [];
-    private connectedUsers = [];
+    private clientUser = {};
+    connectedUsers = [];
 
     async getChats() {
         return await this.chatModel.find().lean();
@@ -21,6 +22,15 @@ export class ChatService {
         return await this.chatModel.findOne({
             _id : id
         }).lean();
+    }
+
+    identify(name :string,clientId:string){
+      this.clientUser[clientId] = name;
+      return Object.values(this.clientUser);
+    }
+
+    getName(clientId:string){
+      return this.clientUser[clientId];
     }
 
     async saveData(chat : ChatDto){

@@ -1,8 +1,10 @@
 import { Bind, OnModuleInit } from "@nestjs/common";
-import { ConnectedSocket, MessageBody, OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage, WebSocketGateway } from "@nestjs/websockets";
+import { ConnectedSocket, MessageBody, OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { NestGateway } from "@nestjs/websockets/interfaces/nest-gateway.interface";
 import { ChatService } from "./chat.service";
 import { ChatDto } from "./dto/chatmessage.dto";
+import { Server, Socket } from "socket.io";
+import { UsersService } from "src/users/users.service";
 
 // @WebSocketGateway({ cors: { origin: ['http://localhost:3000/chat', 'http://localhost:4200'] } })
 
@@ -26,8 +28,12 @@ import { ChatDto } from "./dto/chatmessage.dto";
 
 
 
-@WebSocketGateway()
+@WebSocketGateway({cors : {origin :'*'}})
 export class ChatGateway implements NestGateway {
+
+  @WebSocketServer()
+  server: Server;
+
   constructor(private chatService: ChatService) { }
 
   afterInit(server: any) {
@@ -57,4 +63,20 @@ export class ChatGateway implements NestGateway {
     sender.emit('newChat', chat);
     sender.broadcast.emit('newChat', chat);
   }
+
+  @SubscribeMessage('findAllMessage')
+  findAll(){
+    return this.chatService.getChats();
+  }
+
+  @SubscribeMessage('join')
+  joinRoom(@MessageBody('name') name : string,@ConnectedSocket() client:Socket){
+    return this.chatService.identify(name,client.id)
+  }
+
+  @SubscribeMessage('typing')
+  async typing(){
+
+  }
+
 }
