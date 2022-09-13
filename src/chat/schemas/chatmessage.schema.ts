@@ -19,3 +19,8 @@ export class Chat{
     isRead : boolean;
 }
 export const ChatSchema = SchemaFactory.createForClass(Chat);
+
+
+
+
+

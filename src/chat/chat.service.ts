@@ -35,6 +35,7 @@ export class ChatService {
 
     async saveData(chat : ChatDto){
       try{
+        console.log('in save data',chat);
         const data = await this.chatModel.create(chat);
         return {data : data , status : {code : "OK" , message : "Chat created successfully"}}
       }catch(error){
